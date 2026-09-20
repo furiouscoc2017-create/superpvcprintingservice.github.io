@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super PVC Printing</title>
+  <meta name="description" content="Super PVC Printing - custom PVC cards, business cards, employee ID cards, student cards, membership cards, and event cards." />
+  <style>
+    :root{
+      --primary:#ff5a36;
+      --primary-2:#ff8c42;
+      --dark:#0f172a;
+      --dark-2:#111827;
+      --light:#f8fafc;
+      --muted:#64748b;
+      --card:#ffffff;
+      --success:#10b981;
+      --border:#e2e8f0;
+      --shadow:0 20px 45px rgba(15,23,42,0.12);
+      --radius:18px;
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#fff7f2,#fff,#fff);
+      color:var(--dark);
+      line-height:1.6;
+    }
+
+    img { max-width:100%; display:block; }
+    a { text-decoration:none; color:inherit; }
+    section { padding:80px 20px; }
+    .container{
+      max-width:1180px;
+      margin:0 auto;
+    }
+
+    .topbar{
+      background:#0b1220;
+      color:#fff;
+      font-size:14px;
+      padding:12px 20px;
+    }
+    .topbar .container{
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    }
+    .topbar a{
+      color:#fff; opacity:.9;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(15,23,42,.08);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:18px 20px;
+      max-width:1180px;
+      margin:0 auto;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:1.6rem;
+      font-weight:800;
+      color:var(--dark);
+    }
+
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--primary), var(--primary-2));
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-weight:900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--dark);
+      font-weight:600;
+      opacity:.9;
+    }
+
+    .nav-button{
+      background:linear-gradient(135deg,var(--primary), var(--primary-2));
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      padding:14px 24px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 12px 25px rgba(255,90,54,.25);
+    }
+
+    .hero{
+      padding:60px 20px 40px;
+      background:
+        radial-gradient(circle at top left, rgba(255,138,84,0.2), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255,90,54,0.18), transparent 30%);
+    }
+
+    .hero-inner{
+      max-width:1180px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:#fff1eb;
+      color:var(--primary);
+      border:1px solid #ffd5c7;
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-size:clamp(2.3rem,5vw,4.3rem);
+      line-height:1.1;
+      margin:20px 0 18px;
+      letter-spacing:-0.04em;
+    }
+
+    .hero p{
+      font-size:1.08rem;
+      color:var(--muted);
+      max-width:600px;
+    }
+
+    .hero-actions{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-top:26px;
+    }
+
+    .primary-btn, .secondary-btn{
+      border-radius:999px;
+      padding:18px 24px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      transition: transform .2s ease;
+      display:inline-block;
+    }
+
+    .primary-btn{
+      background:linear-gradient(135deg,var(--primary), var(--primary-2));
+      color:#fff;
+      box-shadow:0 12px 30px rgba(255,90,54,.25);
+    }
+
+    .secondary-btn{
+      background:#fff;
+      color:var(--dark);
+      border:1px solid var(--border);
+    }
+
+    .primary-btn:hover, .secondary-btn:hover, .nav-button:hover{
+      transform:translateY(-2px);
+    }
+
+    .hero-stats{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      margin-top:30px;
+    }
+
+    .stat{
+      min-width:140px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px 18px;
+      box-shadow:0 10px 20px rgba(15,23,42,.04);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:1.5rem;
+      color:var(--dark);
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:0.86rem;
+    }
+
+    .hero-card{
+      background:linear-gradient(160deg,#0f172a,#1f2937);
+      border-radius:28px;
+      padding:24px;
+      color:#fff;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-20% auto auto -10%;
+      width:220px; height:220px;
+      background:rgba(255, 120, 70, .3);
+      border-radius:50%;
+      filter:blur(10px);
+    }
+
+    .mini-box{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:16px;
+      padding:18px 18px;
+      margin-bottom:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .mini-box h3{
+      margin:0 0 8px;
+      font-size:1.2rem;
+    }
+
+    .mini-box p{
+      margin:0;
+      color:rgba(255,255,255,0.75);
+    }
+
+    .price-tag{
+      position:relative;
+      z-index:1;
+      font-size:2.5rem;
+      font-weight:800;
+      margin-top:10px;
+      display:flex;
+      align-items:baseline;
+      gap:8px;
+    }
+
+    .price-tag small{
+      font-size:1rem;
+      opacity:.8;
+    }
+
+    .section-head{
+      text-align:center;
+      margin-bottom:34px;
+    }
+
+    .section-head h2{
+      margin:0 0 10px;
+      font-size:clamp(2rem,4vw,3rem);
+      letter-spacing:-0.04em;
+    }
+
+    .section-head p{
+      margin:0 auto;
+      max-width:700px;
+      color:var(--muted);
+      font-size:1.02rem;
+    }
+
+    .features-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:22px;
+    }
+
+    .feature-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:26px 22px;
+      box-shadow:0 12px 25px rgba(15,23,42,.03);
+    }
+
+    .feature-icon{
+      width:52px;
+      height:52px;
+      border-radius:13px;
+      background:linear-gradient(135deg,#fff1eb,#ffe8d8);
+      display:grid;
+      place-items:center;
+      font-size:1.5rem;
+      margin-bottom:18px;
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    .feature-card h3{
+      margin:0 0 10px;
+      font-size:1.12rem;
+    }
+
+    .feature-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:24px;
+    }
+
+    .price-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:26px 22px;
+      position:relative;
+      box-shadow:0 16px 30px rgba(15,23,42,.04);
+    }
+
+    .price-card.featured{
+      background:linear-gradient(180deg,#fff8f5,#fff);
+      border:1px solid rgba(255,90,54,.3);
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(255,90,54,.08);
+    }
+
+    .badge{
+      position:absolute;
+      right:20px;
+      top:20px;
+      background:var(--primary);
+      color:#fff;
+      border-radius:999px;
+      font-size:11px;
+      padding:8px 10px;
+      font-weight:700;
+    }
+
+    .price-card h3{
+      margin:0 0 12px;
+      font-size:1.4rem;
+    }
+
+    .price{
+      font-size:2.4rem;
+      font-weight:800;
+      margin:10px 0;
+      color:var(--dark);
+    }
+
+    .price small{
+      font-size:1rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .price-card ul{
+      margin:18px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    .price-card li{
+      margin:10px 0;
+    }
+
+    .products-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:22px;
+    }
+
+    .product-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 18px 30px rgba(15,23,42,.03);
+    }
+
+    .product-visual{
+      height:220px;
+      background:linear-gradient(135deg,#fff1eb,#f0fdf4,#e0f2fe);
+      display:grid;
+      place-items:center;
+      font-size:3rem;
+      color:var(--primary);
+      font-weight:900;
+    }
+
+    .product-body{
+      padding:22px;
+    }
+
+    .product-body h3{
+      margin:0 0 10px;
+      font-size:1.2rem;
+    }
+
+    .product-body p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    .order-wrap{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:26px;
+      align-items:start;
+    }
+
+    .form-card, .payment-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:28px 24px;
+      box-shadow:0 20px 38px rgba(15,23,42,.04);
+    }
+
+    form{
+      display:grid;
+      gap:16px;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    label{
+      display:block;
+      font-size:0.92rem;
+      font-weight:700;
+      color:var(--dark);
+      margin-bottom:7px;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:14px 15px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font:inherit;
+      color:var(--dark);
+      resize:vertical;
+    }
+
+    textarea{
+      min-height:110px;
+    }
+
+    .check{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .check input{
+      width:18px; height:18px; margin-top:3px;
+    }
+
+    .submit-btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,var(--primary), var(--primary-2));
+      border:none;
+      color:#fff;
+      border-radius:14px;
+      font-weight:800;
+      padding:16px 20px;
+      cursor:pointer;
+      width:100%;
+      box-shadow:0 12px 28px rgba(255,90,54,.22);
+    }
+
+    .payment-card{
+      background:linear-gradient(180deg, #fff8f5, #fff);
+    }
+
+    .payment-card h3{
+      margin:0 0 10px;
+      font-size:1.7rem;
+    }
+
+    .payment-box{
+      border:1px solid rgba(255,90,54,.18);
+      background:#fff;
+      border-radius:18px;
+      padding:20px;
+      margin-top:18px;
+    }
+
+    .payment-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:10px 0;
+      border-bottom:1px solid var(--border);
+    }
+
+    .payment-row:last-child{
+      border-bottom:none;
+    }
+
+    .upi-demo{
+      background:#f5f5f5;
+      border:1px dashed #cbd5e1;
+      border-radius:12px;
+      padding:12px 14px;
+      font-weight:700;
+      color:#0f172a;
+      text-align:center;
+      margin-top:16px;
+      word-break:break-all;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:22px;
+    }
+
+    .contact-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px 20px;
+      text-align:center;
+      box-shadow:0 18px 30px rgba(15,23,42,.03);
+    }
+
+    .contact-card strong{
+      display:block;
+      font-size:1.2rem;
+      margin-top:16px;
+      margin-bottom:6px;
+    }
+
+    .contact-card span{
+      color:var(--muted);
+      display:block;
+      font-size:0.95rem;
+    }
+
+    footer{
+      background:#0b1220;
+      color:#fff;
+      padding:35px 20px;
+    }
+
+    .footer-inner{
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+
+    @media (max-width: 980px){
+      .features-grid, .products-grid, .pricing-grid, .contact-grid, .order-wrap, .hero-inner{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .features-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 720px){
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .nav-links{
+        gap:14px 18px;
+      }
+
+      .hero-inner, .features-grid, .products-grid, .pricing-grid, .contact-grid, .order-wrap, .two-col{
+        grid-template-columns:1fr;
+      }
+
+      .brand{
+        font-size:1.25rem;
+      }
+
+      h1{
+        font-size:2.4rem;
+      }
+
+      section{
+        padding:68px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span>📍 Kolkata, West Bengal</span>
+      <span>📞 +91 7557007954</span>
+      <span>📧 samiranyt63@gmail.com</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <span>Super PVC Printing</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#order">Order</a>
+        <a href="#contact">Contact</a>
+        <button class="nav-button" onclick="window.location.href='#order'">Order Now</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Premium custom cards</span>
+        <h1>Bright, strong, and premium PVC cards for your business.</h1>
+        <p>
+          Custom PVC name cards, employee ID cards, event cards, business cards, membership cards,
+          school cards, and more. Clean design, fast printing, and online payment only.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#order" class="primary-btn">Place Your Order</a>
+          <a href="#products" class="secondary-btn">Explore Products</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>₹50</strong>
+            <span>Per card</span>
+          </div>
+          <div class="stat">
+            <strong>₹400</strong>
+            <span>Min. bulk 10 cards</span>
+          </div>
+          <div class="stat">
+            <strong>72 Hrs</strong>
+            <span>Dispatch target</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="mini-box">
+          <h3>Business ID Card</h3>
+          <p>Premium finish with lamination, strong PVC body, sharp print quality.</p>
+        </div>
+
+        <div class="mini-box">
+          <h3>Custom Design</h3>
+          <p>Photo, name, logo, QR, ID number, and complete personalization.</p>
+        </div>
+
+        <div class="price-tag">
+          ₹50 <small>per card</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="container">
+      <div class="section-head">
+        <h2>Products We Print</h2>
+        <p>We create premium PVC cards for professional and personal branding across multiple uses.</p>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-visual">ID</div>
+          <div class="product-body">
+            <h3>Employee ID Cards</h3>
+            <p>Durable office ID cards with logo, photo, department name, and employee details.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-visual">★</div>
+          <div class="product-body">
+            <h3>Membership Cards</h3>
+            <p>Custom club, association, gym, and membership identity cards with a polished finish.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-visual">QR</div>
+          <div class="product-body">
+            <h3>Smart PVC Cards</h3>
+            <p>QR code, barcodes, and custom lanyard-friendly cards for business and event use.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-visual">🎓</div>
+          <div class="product-body">
+            <h3>Student Cards</h3>
+            <p>School and college identity cards with name, ID number, photo, and institute branding.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-visual">📍</div>
+          <div class="product-body">
+            <h3>Event Cards</h3>
+            <p>VIP passes, event access cards, seminar badges, and visitor identity cards.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-visual">💼</div>
+          <div class="product-body">
+            <h3>Business Cards</h3>
+            <p>Premium PVC business cards and professional contact cards built for long-term use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" style="background:#fffaf8;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Pricing</h2>
+        <p>Simple pricing for personal, business, and bulk orders.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Single Card</h3>
+          <div class="price">₹50 <small>per card</small></div>
+          <ul>
+            <li>Best for personal or small use</li>
+            <li>Printed on premium PVC</li>
+            <li>Includes standard finishing</li>
+          </ul>
+        </div>
+
+        <div class="price-card featured">
+          <span class="badge">Popular</span>
+          <h3>Bulk Order</h3>
+          <div class="price">₹400 <small>for 10 cards</small></div>
+          <ul>
+            <li>Best value for business orders</li>
+            <li>Bulk discount pricing</li>
+            <li>Custom design support</li>
+          </ul>
+        </div>
+
+        <div class="price-card">
+          <h3>Custom Design</h3>
+          <div class="price">Quote Based</div>
+          <ul>
+            <li>Logo design assistance</li>
+            <li>Special size and format options</li>
+            <li>Priority production available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="container">
+      <div class="section-head">
+        <h2>Order Your Cards</h2>
+        <p>Upload your design or photo and share your requirement. We will confirm after payment.</p>
+      </div>
+
+      <div class="order-wrap">
+        <div class="form-card">
+          <form id="orderForm">
+            <div class="two-col">
+              <div>
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+              </div>
+              <div>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+              </div>
+              <div>
+                <label for="product">Card Type</label>
+                <select id="product" name="product" required>
+                  <option value="">Select product</option>
+                  <option>Employee ID Card</option>
+                  <option>Business Card</option>
+                  <option>Student Card</option>
+                  <option>Membership Card</option>
+                  <option>Event Card</option>
+                  <option>Custom PVC Card</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <label for="qty">Quantity</label>
+                <input type="number" id="qty" name="qty" min="1" value="10" required />
+              </div>
+              <div>
+                <label for="size">Card Size</label>
+                <select id="size" name="size">
+                  <option>Standard 85 x 54 mm</option>
+                  <option>Custom Size</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="upload">Upload Design / Photo</label>
+              <input type="file" id="upload" name="upload" />
+            </div>
+
+            <div>
+              <label for="address">Delivery Address</label>
+              <textarea id="address" name="address" placeholder="Enter your complete delivery address" required></textarea>
+            </div>
+
+            <div>
+              <label for="notes">Additional Details</label>
+              <textarea id="notes" name="notes" placeholder="Mention your logo, print details, quantity requirement, or design notes"></textarea>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" required />
+              <span>I agree that my uploaded design is lawful, and I confirm I own the rights to use the uploaded content.</span>
+            </label>
+
+            <button type="submit" class="submit-btn">Send Order Request</button>
+          </form>
+        </div>
+
+        <div class="payment-card">
+          <h3>Online Payment Only</h3>
+          <p style="color:var(--muted); margin:0;">
+            No Cash on Delivery. Orders are accepted strictly after successful online payment confirmation.
+          </p>
+
+          <div class="payment-box">
+            <div class="payment-row">
+              <span>Single Card</span>
+              <strong>₹50</strong>
+            </div>
+            <div class="payment-row">
+              <span>Minimum Bulk</span>
+              <strong>10 cards = ₹400</strong>
+            </div>
+            <div class="payment-row">
+              <span>Shipping</span>
+              <strong>Speed Post / India Post</strong>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <a class="primary-btn" href="upi://pay?pa=your_business_upi@upi&pn=Super%20PVC%20Printing&cu=INR" style="display:block; text-align:center;">
+              Pay Now
+            </a>
+          </div>
+
+          <div class="upi-demo">
+            Replace with your real business UPI ID after account setup.
+          </div>
+
+          <p style="margin-top:18px; color:var(--muted); font-size:0.95rem;">
+            For a free test version, replace the payment link with your own UPI or switch to Razorpay/Cashfree when you are ready for live online payments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#fff;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contact Us</h2>
+        <p>We are ready to help with custom printed PVC orders across India.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div style="font-size:2rem;">📞</div>
+          <strong>Phone</strong>
+          <span>+91 7557007954</span>
+        </div>
+
+        <div class="contact-card">
+          <div style="font-size:2rem;">📧</div>
+          <strong>Email</strong>
+          <span>samiranyt63@gmail.com</span>
+        </div>
+
+        <div class="contact-card">
+          <div style="font-size:2rem;">📍</div>
+          <strong>Location</strong>
+          <span>Kolkata, West Bengal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong>Super PVC Printing</strong><br/>
+        Custom printed PVC cards for business and branding
+      </div>
+
+      <div>
+        Online payment only • No COD • Speed Post tracking available
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const product = document.getElementById('product').value;
+      const qty = document.getElementById('qty').value;
+      const address = document.getElementById('address').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      const message = encodeURIComponent(
+        "Hello Super PVC Printing,\n\n" +
+        "New order request:\n" +
+        "Name: " + name + "\n" +
+        "Phone: " + phone + "\n" +
+        "Email: " + email + "\n" +
+        "Product: " + product + "\n" +
+        "Quantity: " + qty + "\n" +
+        "Address: " + address + "\n" +
+        "Notes: " + notes
+      );
+
+      window.open("https://wa.me/917557007954?text=" + message, "_blank");
+      alert("Your order request has been prepared in WhatsApp. Please send it and complete payment.");
+    });
+  </script>
+</body>
+</html>
